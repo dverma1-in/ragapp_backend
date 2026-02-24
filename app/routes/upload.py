@@ -7,7 +7,7 @@ from app.services import ingest_file
 #router = APIRouter()
 router = APIRouter(prefix="/upload", tags=['upload'])
 
-@router.post("/")
+@router.post("")
 async def upload_file(file: UploadFile = File(...)):
     try:
       await ingest_file(file)
