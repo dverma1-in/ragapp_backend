@@ -1,5 +1,5 @@
-from fastapi import UploadFile
 from typing import List
+from fastapi import UploadFile
 
 from app.loaders.base import BaseLoader
 from app.loaders.types import TextUnit
@@ -8,7 +8,6 @@ from app.loaders.types import TextUnit
 class TXTLoader(BaseLoader):
     async def load(self, file: UploadFile) -> List[TextUnit]:
         content = await file.read()
-
         try:
             text = content.decode("utf-8")
         except UnicodeDecodeError:
@@ -17,12 +16,7 @@ class TXTLoader(BaseLoader):
         if not text.strip():
             return []
 
-        return [
-            {
-                "text": text,
-                "metadata": {
-                    "file_name": file.filename,
-                    "file_type": "txt"
-                }
-            }
-        ]
+        return [TextUnit(
+            text=text,
+            metadata={"file_name": file.filename, "file_type": "txt"}
+        )]

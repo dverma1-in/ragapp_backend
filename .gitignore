@@ -3,3 +3,5 @@ venv
 /venv
 /data
 data
+_pycache_
+__pycache__
